@@ -138,20 +138,6 @@ export const Game: React.FC<GameProps> = ({ mode, level, responseType, onGameEnd
     }
   }, [gameState.lives, gameState.timeRemaining, mode, onGameEnd]);
 
-  const generateMultipleChoiceOptions = (question: Question) => {
-    const correct = question.a * question.b;
-    const options = [correct];
-    
-    while (options.length < 4) {
-      const wrong = Math.floor(Math.random() * (correct + 50)) + 1;
-      if (!options.includes(wrong) && wrong !== correct) {
-        options.push(wrong);
-      }
-    }
-    
-    return options.sort(() => Math.random() - 0.5);
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userInput.trim() || !gameState.currentQuestion) return;
