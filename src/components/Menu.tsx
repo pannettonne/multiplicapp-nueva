@@ -61,12 +61,18 @@ export const Menu: React.FC<MenuProps> = ({ onSelectMode }) => {
         <h2>Elige Modo de Juego</h2>
         
         <div className="mode-buttons">
-          <button className="mode-btn learning-btn">
+          <button 
+            className="mode-btn learning-btn"
+            onClick={() => onSelectMode('learning', 1)}
+          >
             <span className="mode-icon">📚</span>
             <span className="mode-title">Aprendizaje</span>
             <span className="mode-desc">Sin presión, con explicaciones</span>
           </button>
-          <button className="mode-btn challenge-btn">
+          <button 
+            className="mode-btn challenge-btn"
+            onClick={() => onSelectMode('challenge', 1)}
+          >
             <span className="mode-icon">⏱️</span>
             <span className="mode-title">Reto Rápido</span>
             <span className="mode-desc">60 segundos de velocidad</span>
