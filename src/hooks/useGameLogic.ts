@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { GameState, Question } from '../types';
 import { QuestionGenerator } from '../questionGenerator';
 import { gameDB } from '../db';
+
 export function useGameLogic() {
   const [gameState, setGameState] = useState<GameState>({
     mode: 'menu',

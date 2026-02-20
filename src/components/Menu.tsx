@@ -5,9 +5,11 @@ import './Menu.css';
 
 interface MenuProps {
   onSelectMode: (mode: 'learning' | 'challenge', level: number) => void;
+  onViewTables: () => void;
+  onLearn: () => void;
 }
 
-export const Menu: React.FC<MenuProps> = ({ onSelectMode }) => {
+export const Menu: React.FC<MenuProps> = ({ onSelectMode, onViewTables, onLearn }) => {
   const [progress, setProgress] = useState<PlayerProgress | null>(null);
   const [recentStats, setRecentStats] = useState<GameStats[]>([]);
 
@@ -76,6 +78,25 @@ export const Menu: React.FC<MenuProps> = ({ onSelectMode }) => {
             <span className="mode-icon">⏱️</span>
             <span className="mode-title">Reto Rápido</span>
             <span className="mode-desc">60 segundos de velocidad</span>
+          </button>
+        </div>
+
+        <div className="extra-buttons">
+          <button 
+            className="extra-btn tables-btn"
+            onClick={onViewTables}
+          >
+            <span className="extra-icon">📊</span>
+            <span className="extra-title">Ver Tablas</span>
+            <span className="extra-desc">Consulta las tablas</span>
+          </button>
+          <button 
+            className="extra-btn learn-btn"
+            onClick={onLearn}
+          >
+            <span className="extra-icon">🎓</span>
+            <span className="extra-title">Aprende</span>
+            <span className="extra-desc">Trucos y curiosidades</span>
           </button>
         </div>
       </div>

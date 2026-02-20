@@ -1,0 +1,171 @@
+.learn-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.back-btn {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.learn-header {
+  text-align: center;
+  color: white;
+}
+
+.learn-header h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.learn-header p {
+  font-size: 16px;
+  margin: 8px 0 0 0;
+  opacity: 0.9;
+}
+
+.content-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.content-btn {
+  padding: 12px;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid white;
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.content-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.content-btn.active {
+  background: white;
+  color: #667eea;
+}
+
+.content-display {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.content-display h3 {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.content-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.content-section h4 {
+  margin: 0 0 10px 0;
+  color: #667eea;
+  font-size: 16px;
+}
+
+.content-section p {
+  margin: 0;
+  color: #333;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.fun-fact {
+  background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+}
+
+.fun-fact h4 {
+  color: #d63031;
+}
+
+.fun-fact p {
+  color: #2d3436;
+}
+
+.song {
+  background: linear-gradient(135deg, #a8e6cf 0%, #56ab91 100%);
+  font-size: 18px;
+  text-align: center;
+}
+
+.song h4 {
+  color: #fff;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .content-selector {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
+
+  .learn-header h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .learn-container {
+    padding: 15px;
+  }
+
+  .content-selector {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .content-btn {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .content-display {
+    padding: 15px;
+  }
+
+  .content-section {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .content-section h4 {
+    font-size: 14px;
+  }
+
+  .content-section p {
+    font-size: 14px;
+  }
+}

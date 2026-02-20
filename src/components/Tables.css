@@ -1,0 +1,151 @@
+.tables-container {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.back-btn {
+  align-self: flex-start;
+  padding: 10px 20px;
+  background: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.tables-header {
+  text-align: center;
+  color: white;
+}
+
+.tables-header h2 {
+  font-size: 32px;
+  margin: 0;
+}
+
+.table-selector {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.table-btn {
+  padding: 12px;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid white;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.table-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+.table-btn.active {
+  background: white;
+  color: #667eea;
+}
+
+.table-display {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.table-display h3 {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.table-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.table-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 15px;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+}
+
+.operation {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.equals {
+  font-size: 14px;
+}
+
+.result {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .table-selector {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .table-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tables-header h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tables-container {
+    padding: 15px;
+  }
+
+  .table-selector {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+
+  .table-btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .table-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .table-item {
+    padding: 12px;
+  }
+
+  .result {
+    font-size: 20px;
+  }
+}

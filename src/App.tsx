@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Menu } from './components/Menu';
 import { Game } from './components/Game';
+import { Tables } from './components/Tables';
+import { Learn } from './components/Learn';
 import { gameDB } from './db';
 import './App.css';
 
-type AppState = 'menu' | 'game-learning' | 'game-challenge';
+type AppState = 'menu' | 'game-learning' | 'game-challenge' | 'tables' | 'learn';
 
 interface GameSession {
   mode: 'learning' | 'challenge';
@@ -37,10 +39,18 @@ function App() {
     setGameSession(null);
   };
 
+  const handleBack = () => {
+    setAppState('menu');
+  };
+
   return (
     <div className="app">
       {appState === 'menu' && (
-        <Menu onSelectMode={handleSelectMode} />
+        <Menu 
+          onSelectMode={handleSelectMode}
+          onViewTables={() => setAppState('tables')}
+          onLearn={() => setAppState('learn')}
+        />
       )}
       {appState === 'game-learning' && gameSession && (
         <Game
@@ -55,6 +65,12 @@ function App() {
           level={gameSession.level}
           onGameEnd={handleGameEnd}
         />
+      )}
+      {appState === 'tables' && (
+        <Tables onBack={handleBack} />
+      )}
+      {appState === 'learn' && (
+        <Learn onBack={handleBack} />
       )}
     </div>
   );
