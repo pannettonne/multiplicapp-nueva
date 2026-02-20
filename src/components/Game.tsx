@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { GameState, Question } from '../types';
 import { useGameLogic } from '../hooks/useGameLogic';
+import { GameOptions } from './GameOptions';
 import './Game.css';
 
 interface GameProps {
@@ -33,7 +34,7 @@ const StreakMilestones: { [key: number]: string } = {
   25: '👑 ¡ÉPICO!',
 };
 
-export const Game: React.FC<GameProps> = ({ mode, level, onGameEnd }) => {
+export const Game: React.FC<GameProps> = ({ mode, level, responseType, onGameEnd }) => {
   const { gameState, startLearningMode, startChallengeMode, submitAnswer, decrementTime } = useGameLogic();
   const [userInput, setUserInput] = useState('');
   const [feedbackMessage, setFeedbackMessage] = useState('');
@@ -42,6 +43,71 @@ export const Game: React.FC<GameProps> = ({ mode, level, onGameEnd }) => {
   const [showVictoryAnimation, setShowVictoryAnimation] = useState(false);
   const [unlockedBadge, setUnlockedBadge] = useState<VictoryBadge | null>(null);
   const [particleList, setParticleList] = useState<Array<{id: number, x: number, y: number}>>([]);
+
+  const generateMultipleChoiceOptions = (question: Question) => {
+    const correctAnswer = question.answer;
+    const options = new Set<number>();
+    options.add(correctAnswer);
+    
+    while (options.size < 4) {
+      const wrong = Math.floor(Math.random() * (correctAnswer + 15)) + Math.max(1, correctAnswer - 10);
+      if (wrong !== correctAnswer) {
+        options.add(wrong);
+      }
+    }
+    
+    return Array.from(options).sort(() => Math.random() - 0.5);
+  };
+
+  const handleSubmitMultiple = (answer: number) => {
+    const result = submitAnswer(answer.toString());
+
+    if (result.isCorrect) {
+      setIsCorrect(true);
+      
+      const newParticles = Array.from({ length: 20 }, (_, i) => ({
+        id: Date.now() + i,
+        x: Math.random() * 100,
+        y: Math.random() * 50,
+      }));
+      setParticleList(newParticles);
+      
+      setShowVictoryAnimation(true);
+      
+      const streakMilestone = Object.keys(victoryBadges)
+        .map(Number)
+        .find(milestone => result.streak === milestone);
+      
+      if (streakMilestone && victoryBadges[streakMilestone]) {
+        setUnlockedBadge(victoryBadges[streakMilestone]);
+      }
+      
+      let message = `🎉 ¡Correcto! +${result.pointsEarned} puntos`;
+      if (result.streak > 1) {
+        const milestone = StreakMilestones[result.streak as keyof typeof StreakMilestones];
+        message += `\n${milestone} 🔥 Racha: ${result.streak}`;
+      }
+      setFeedbackMessage(message);
+    } else {
+      setIsCorrect(false);
+      if (gameState.currentQuestion) {
+        setFeedbackMessage(`❌ Incorrecto. ${gameState.currentQuestion.a} × ${gameState.currentQuestion.b} = ${gameState.currentQuestion.answer}`);
+      }
+    }
+
+    setShowFeedback(true);
+    setUserInput('');
+
+    setTimeout(() => {
+      setShowFeedback(false);
+      setShowVictoryAnimation(false);
+      setUnlockedBadge(null);
+      
+      if (gameState.gameOver) {
+        onGameEnd();
+      }
+    }, 2000);
+  };
 
   useEffect(() => {
     if (mode === 'learning') {
@@ -71,6 +137,31 @@ export const Game: React.FC<GameProps> = ({ mode, level, onGameEnd }) => {
       }, 2000);
     }
   }, [gameState.lives, gameState.timeRemaining, mode, onGameEnd]);
+
+  const generateMultipleChoiceOptions = (question: Question) => {
+    const correct = question.a * question.b;
+    const options = [correct];
+    
+    while (options.length < 4) {
+      const wrong = Math.floor(Math.random() * (correct + 50)) + 1;
+      if (!options.includes(wrong) && wrong !== correct) {
+        options.push(wrong);
+      }
+    }
+    
+    return options.sort(() => Math.random() - 0.5);
+  };
+
+  const handleSubmitMultiple = (selectedAnswer: number) => {
+    if (!gameState.currentQuestion) return;
+    const isAnswerCorrect = selectedAnswer === gameState.currentQuestion.a * gameState.currentQuestion.b;
+    const result = submitAnswer(selectedAnswer, isAnswerCorrect);
+    
+    setIsCorrect(isAnswerCorrect);
+    setFeedbackMessage(result.message);
+    setShowFeedback(true);
+    setUserInput('');
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,17 +267,39 @@ export const Game: React.FC<GameProps> = ({ mode, level, onGameEnd }) => {
         </div>
 
         <form onSubmit={handleSubmit} className="answer-form">
-          <input
-            type="number"
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Escribe tu respuesta"
-            autoFocus
-            min="0"
-          />
-          <button type="submit" disabled={!userInput.trim()}>
-            Responder
-          </button>
+          {responseType === 'multiple-choice' ? (
+            <div className="multiple-choice-options">
+              {gameState.currentQuestion && generateMultipleChoiceOptions(gameState.currentQuestion).map((option, idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  className={`option-btn ${userInput === option.toString() ? 'selected' : ''}`}
+                  onClick={() => {
+                    setUserInput(option.toString());
+                    setTimeout(() => {
+                      handleSubmitMultiple(option);
+                    }, 100);
+                  }}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          ) : (
+            <>
+              <input
+                type="number"
+                value={userInput}
+                onChange={(e) => setUserInput(e.target.value)}
+                placeholder="Escribe tu respuesta"
+                autoFocus
+                min="0"
+              />
+              <button type="submit" disabled={!userInput.trim()}>
+                Responder
+              </button>
+            </>
+          )}
         </form>
 
         {showFeedback && (

@@ -546,3 +546,130 @@
     font-size: 0.85em;
   }
 }
+
+.multiple-choice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
+}
+
+.option-btn {
+  padding: 15px 20px;
+  background: white;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: scale(1.05);
+}
+
+.option-btn.selected {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+@media (max-width: 480px) {
+  .multiple-choice-options {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .option-btn {
+    padding: 12px 15px;
+    font-size: 16px;
+  }
+}
+
+/* Opciones Múltiples */
+.multiple-choice-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.option-btn {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: 3px solid white;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.option-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.option-btn.selected {
+  background: white;
+  color: #667eea;
+  border-color: #667eea;
+}
+
+@media (max-width: 768px) {
+  .multiple-choice-options {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .option-btn {
+    padding: 15px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .multiple-choice-options {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .option-btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+/* Ajustar para que la parte de arriba se vea mejor */
+.game-container {
+  padding-top: 15px;
+}
+
+.game-header {
+  margin-bottom: 20px;
+}
+
+.question {
+  margin: 15px 0;
+}
+
+.question h2 {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+@media (max-width: 480px) {
+  .question h2 {
+    font-size: 24px;
+  }
+
+  .game-header {
+    margin-bottom: 15px;
+  }
+}
