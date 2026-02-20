@@ -152,17 +152,6 @@ export const Game: React.FC<GameProps> = ({ mode, level, responseType, onGameEnd
     return options.sort(() => Math.random() - 0.5);
   };
 
-  const handleSubmitMultiple = (selectedAnswer: number) => {
-    if (!gameState.currentQuestion) return;
-    const isAnswerCorrect = selectedAnswer === gameState.currentQuestion.a * gameState.currentQuestion.b;
-    const result = submitAnswer(selectedAnswer, isAnswerCorrect);
-    
-    setIsCorrect(isAnswerCorrect);
-    setFeedbackMessage(result.message);
-    setShowFeedback(true);
-    setUserInput('');
-  };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userInput.trim() || !gameState.currentQuestion) return;
