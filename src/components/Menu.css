@@ -1,0 +1,245 @@
+.menu-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.menu-header {
+  text-align: center;
+  margin-bottom: 30px;
+  animation: slideDown 0.6s ease-out;
+}
+
+.menu-header h1 {
+  font-size: 3em;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.menu-header p {
+  font-size: 1.2em;
+  margin: 10px 0 0 0;
+  opacity: 0.9;
+}
+
+.stats-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 15px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9em;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.mode-selector {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.mode-selector h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.mode-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  max-width: 500px;
+  margin: 0 auto 40px;
+}
+
+.mode-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.mode-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.mode-icon {
+  font-size: 2.5em;
+}
+
+.mode-title {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.mode-desc {
+  font-size: 0.8em;
+  opacity: 0.8;
+}
+
+.levels-grid {
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.levels-grid h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.levels {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.level-option {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.level-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.level-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.level-emoji {
+  font-size: 2.5em;
+}
+
+.level-name {
+  font-weight: bold;
+  text-align: center;
+}
+
+.level-challenge-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.level-challenge-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.recent-games {
+  max-width: 600px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.recent-games h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.games-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95em;
+}
+
+.game-mode {
+  font-size: 1.3em;
+}
+
+.game-accuracy {
+  flex: 1;
+}
+
+.game-score {
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-header h1 {
+    font-size: 2em;
+  }
+
+  .levels {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-buttons {
+    grid-template-columns: 1fr;
+  }
+}
