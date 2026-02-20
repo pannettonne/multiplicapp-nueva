@@ -3,14 +3,16 @@ import { Menu } from './components/Menu';
 import { Game } from './components/Game';
 import { Tables } from './components/Tables';
 import { Learn } from './components/Learn';
+import { ResponseMode } from './components/ResponseMode';
 import { gameDB } from './db';
 import './App.css';
 
-type AppState = 'menu' | 'game-learning' | 'game-challenge' | 'tables' | 'learn';
+type AppState = 'menu' | 'response-mode' | 'game-learning' | 'game-challenge' | 'tables' | 'learn';
 
 interface GameSession {
   mode: 'learning' | 'challenge';
   level: number;
+  responseType: 'multiple-choice' | 'write';
 }
 
 function App() {
@@ -30,8 +32,15 @@ function App() {
   }, []);
 
   const handleSelectMode = (mode: 'learning' | 'challenge', level: number) => {
-    setGameSession({ mode, level });
-    setAppState(mode === 'learning' ? 'game-learning' : 'game-challenge');
+    setGameSession({ mode, level, responseType: 'multiple-choice' });
+    setAppState('response-mode');
+  };
+
+  const handleSelectResponseType = (responseType: 'multiple-choice' | 'write') => {
+    if (gameSession) {
+      setGameSession({ ...gameSession, responseType });
+      setAppState(gameSession.mode === 'learning' ? 'game-learning' : 'game-challenge');
+    }
   };
 
   const handleGameEnd = () => {
@@ -52,10 +61,17 @@ function App() {
           onLearn={() => setAppState('learn')}
         />
       )}
+      {appState === 'response-mode' && gameSession && (
+        <ResponseMode 
+          onSelectMode={handleSelectResponseType}
+          onBack={handleBack}
+        />
+      )}
       {appState === 'game-learning' && gameSession && (
         <Game
           mode="learning"
           level={gameSession.level}
+          responseType={gameSession.responseType}
           onGameEnd={handleGameEnd}
         />
       )}
@@ -63,6 +79,7 @@ function App() {
         <Game
           mode="challenge"
           level={gameSession.level}
+          responseType={gameSession.responseType}
           onGameEnd={handleGameEnd}
         />
       )}

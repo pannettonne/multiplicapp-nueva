@@ -6,6 +6,7 @@ import './Game.css';
 interface GameProps {
   mode: 'learning' | 'challenge';
   level: number;
+  responseType: 'multiple-choice' | 'write';
   onGameEnd: () => void;
 }
 
